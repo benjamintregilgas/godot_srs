@@ -7,8 +7,14 @@ class_name PathManager
 
 
 ## Returns folder path for profiles.
-static func get_profiles_folder() -> String:
+static func _get_profiles_folder() -> String:
 	if Engine.is_editor_hint():
 		return "res://data/profiles/"
 	else:
 		return "user://profiles/"
+
+## Opens the folder path for profiles.
+static func open_profiles_folder() -> String:
+	var profiles_folder: String = _get_profiles_folder()
+	DirAccess.make_dir_recursive_absolute(profiles_folder)
+	return profiles_folder
