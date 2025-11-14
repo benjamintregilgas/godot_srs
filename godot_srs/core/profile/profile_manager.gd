@@ -18,12 +18,21 @@ func _ready() -> void:
 
 #region Helper Functions
 
+## Returns [code]true[/code] if profile_name does not contain invalid characters.
+func is_valid_profile_name(profile_name: String) -> bool:
+	var invalid_chars = ["\\", "/", ":", "*", "?", "\"", "<", ">", "|"]
+	for c in invalid_chars:
+		if profile_name.find(c) != -1:
+			return false
+	return true
+
+
 ## Returns the [Profile] instance with the given name, or [code]null[/code] if not found.
 func get_profile_by_name(profile_name: String) -> Profile:
 	for profile in profiles:
 		if profile.profile_name == profile_name:
 			return profile
-	push_error("Failed to load profile '%s'." % profile_name)
+	push_warning("Failed to load profile '%s'." % profile_name)
 	return null
 
 
@@ -51,6 +60,9 @@ func load_all_profiles() -> void:
 func create_profile(profile_name: String) -> Profile:
 	if get_profile_by_name(profile_name) != null:
 		push_error("Profile with name '%s' already exists." % profile_name)
+		return null
+	if not is_valid_profile_name(profile_name):
+		push_error("Invalid profile_name: '%s'." % profile_name)
 		return null
 	var profile: Profile = Profile.new()
 	profile.profile_name = profile_name
@@ -101,5 +113,30 @@ func delete_profile(profile_name: String) -> bool:
 	if dir_access == null or not dir_access.file_exists(profile_save_path):
 		return true
 	return dir_access.remove(profile_save_path) == OK
+
+
+## Renames a profile from [param old_name] to [param new_name] in memory and disk.
+## Returns [code]true[/code] on success, [code]false[/code] on failure.
+func rename_profile(old_name: String, new_name: String) -> bool:
+	var profile: Profile = get_profile_by_name(old_name)
+	if profile == null:
+		return false
+	if get_profile_by_name(new_name) != null:
+		push_error("Profile with name '%s' already exists." % new_name)
+		return false
+	if not is_valid_profile_name(new_name):
+		push_error("Invalid profile_name: '%s'." % new_name)
+		return false
+	var old_profile_name: String = profile.profile_name
+	profile.profile_name = new_name
+	var save_error: Error = save_profile(profile)
+	if save_error != OK:
+		push_error("Failed to save renamed profile '%s'." % new_name)
+		profile.profile_name = old_profile_name
+		return false
+	if not delete_profile(old_profile_name):
+		push_warning("Old profile '%s' could not be deleted.")
+	profile_list_changed.emit()
+	return true
 
 #endregion
