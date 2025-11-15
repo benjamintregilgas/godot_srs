@@ -6,12 +6,17 @@ extends Node
 
 ## Sets the window's title and size. [br]
 ## Performs a UI refresh to fix layout issues after resizing. [br]
-func set_window(title: String, size: Vector2i, centered: bool = true) -> void:
+func set_window(title: String, size: Vector2i, centered: bool = true, min_size: Vector2i = Vector2i.ZERO, max_size: Vector2i = Vector2i.ZERO) -> void:
 	# Wait for Godot-specific initialization before handling visual window changes.
 	await get_tree().process_frame
 	# Set title and size.
 	DisplayServer.window_set_title(title)
 	DisplayServer.window_set_size(size)
+	# Set window min and max size.
+	if min_size != Vector2i.ZERO:
+		DisplayServer.window_set_min_size(min_size)
+	if max_size != Vector2i.ZERO:
+		DisplayServer.window_set_max_size(max_size)
 	# Center window on current display.
 	if centered:
 		var screen_size: Vector2i = DisplayServer.screen_get_size()

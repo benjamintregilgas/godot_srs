@@ -22,6 +22,15 @@ config/icon="uid://cf0g1cxo6kiwn"
 ProfileManager="*res://core/profile/profile_manager.gd"
 WindowManager="*res://core/window/window_manager.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+[gui]
+
+theme/custom_font="uid://chmlxgcg0mwva"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

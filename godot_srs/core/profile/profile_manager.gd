@@ -11,6 +11,9 @@ signal profile_list_changed
 ## Currently loaded profiles in memory.
 @export var profiles: Array[Profile] = []
 
+## Currently loaded profile for app usage.
+var current_profile: Profile = null
+
 
 func _ready() -> void:
 	load_all_profiles()

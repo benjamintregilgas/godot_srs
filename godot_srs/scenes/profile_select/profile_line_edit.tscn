@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgek1egr75vnb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ishrq"]
+content_margin_left = 5.0
+bg_color = Color(0.09803922, 0.09803922, 0.09803922, 0)
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4wj7"]
+content_margin_left = 5.0
+bg_color = Color(0.36074692, 0.45895782, 0.5684909, 0.531)
+corner_detail = 5
+
+[node name="ProfileLineEdit" type="LineEdit"]
+offset_right = 51.0
+offset_bottom = 40.0
+theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+theme_override_styles/read_only = SubResource("StyleBoxFlat_ishrq")
+theme_override_styles/focus = SubResource("StyleBoxFlat_e4wj7")
+text = "Testing"
+editable = false

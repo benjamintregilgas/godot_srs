@@ -1,0 +1,127 @@
+[gd_scene load_steps=7 format=3 uid="uid://cya453cvropc7"]
+
+[ext_resource type="Script" uid="uid://b1bpvxnped8pu" path="res://scenes/profile_select/profile_select.gd" id="1_5ad8p"]
+[ext_resource type="StyleBox" uid="uid://dnphpry3mcka6" path="res://ui/components/styleboxes/button/button_normal.tres" id="1_e5oy6"]
+[ext_resource type="StyleBox" uid="uid://bg3hxsv1pke1h" path="res://ui/components/styleboxes/button/button_hover.tres" id="2_th740"]
+[ext_resource type="StyleBox" uid="uid://dxofbjhud7dpd" path="res://ui/components/styleboxes/button/button_disabled.tres" id="3_e6x43"]
+[ext_resource type="StyleBox" uid="uid://dwnat5a0if2ln" path="res://ui/components/styleboxes/button/button_focus.tres" id="3_th740"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5kwe"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.14509805, 0.14509805, 0.14509805, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="ProfileSelect" type="Control" node_paths=PackedStringArray("profile_container")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5ad8p")
+profile_container = NodePath("Margin/Content/Profiles/ScrollContainer/VBoxContainer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.17254902, 0.17254902, 0.17254902, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Content" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Profiles" type="PanelContainer" parent="Margin/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_s5kwe")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Margin/Content/Profiles"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Content/Profiles/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Options" type="VBoxContainer" parent="Margin/Content"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Open" type="Button" parent="Margin/Content/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("1_e5oy6")
+theme_override_styles/pressed = ExtResource("1_e5oy6")
+theme_override_styles/hover = ExtResource("2_th740")
+theme_override_styles/disabled = ExtResource("3_e6x43")
+theme_override_styles/focus = ExtResource("3_th740")
+disabled = true
+text = "Open"
+
+[node name="Add" type="Button" parent="Margin/Content/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("1_e5oy6")
+theme_override_styles/pressed = ExtResource("1_e5oy6")
+theme_override_styles/hover = ExtResource("2_th740")
+theme_override_styles/disabled = ExtResource("3_e6x43")
+theme_override_styles/focus = ExtResource("3_th740")
+disabled = true
+text = "Add"
+
+[node name="Rename" type="Button" parent="Margin/Content/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("1_e5oy6")
+theme_override_styles/pressed = ExtResource("1_e5oy6")
+theme_override_styles/hover = ExtResource("2_th740")
+theme_override_styles/disabled = ExtResource("3_e6x43")
+theme_override_styles/focus = ExtResource("3_th740")
+disabled = true
+text = "Rename"
+
+[node name="Delete" type="Button" parent="Margin/Content/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("1_e5oy6")
+theme_override_styles/pressed = ExtResource("1_e5oy6")
+theme_override_styles/hover = ExtResource("2_th740")
+theme_override_styles/disabled = ExtResource("3_e6x43")
+theme_override_styles/focus = ExtResource("3_th740")
+disabled = true
+text = "Delete"
+
+[node name="Quit" type="Button" parent="Margin/Content/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = ExtResource("1_e5oy6")
+theme_override_styles/pressed = ExtResource("1_e5oy6")
+theme_override_styles/hover = ExtResource("2_th740")
+theme_override_styles/disabled = ExtResource("3_e6x43")
+theme_override_styles/focus = ExtResource("3_th740")
+disabled = true
+text = "Quit"
