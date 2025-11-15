@@ -16,6 +16,9 @@ extends Control
 @export var add_profile_line_edit: LineEdit
 @export_group("Name Exists Window")
 @export var name_exists_window: Window
+@export_group("Rename Profile Window")
+@export var rename_profile_window: Window
+@export var rename_profile_line_edit: LineEdit
 @export_group("Delete Profile Window")
 @export var confirm_delete_profile_window: Window
 @export var confirm_delete_profile_prompt: Label
@@ -91,6 +94,32 @@ func _on_add_profile_confirm_pressed() -> void:
 func _hide_name_exists_window() -> void:
 	name_exists_window.hide()
 
+# Rename Profile
+func _on_rename_profile_pressed() -> void:
+	_refresh_options_buttons(true)
+	rename_profile_window.popup_centered()
+
+func _hide_rename_profile_window() -> void:
+	rename_profile_line_edit.text = ""
+	rename_profile_window.hide()
+
+func _on_rename_profile_confirm_pressed() -> void:
+	var old_name: String = selected_profile.profile_name
+	var new_name: String = rename_profile_line_edit.text.strip_edges()
+	if new_name == "":
+		_hide_rename_profile_window()
+		return
+	if ProfileManager.get_profile_by_name(new_name) != null:
+		_hide_rename_profile_window()
+		name_exists_window.popup_centered()
+		return
+	selected_profile = null
+	if not ProfileManager.rename_profile(old_name, new_name):
+		push_error("Could not rename profile '%s' to '%s'." % [old_name, new_name])
+	_refresh_profile_list()
+	_hide_rename_profile_window()
+
+
 # Delete Profile
 func _on_delete_profile_pressed() -> void:
 	_refresh_options_buttons(true)
@@ -101,10 +130,10 @@ func _hide_confirm_delete_profile_window() -> void:
 	confirm_delete_profile_window.hide()
 
 func _on_delete_profile_confirm_pressed() -> void:
-	var profile_name: String = selected_profile.profile_name
+	var target_profile: Profile = selected_profile
 	selected_profile = null
-	if not ProfileManager.delete_profile(profile_name):
-		push_error("Failed to delete profile '%s'." % profile_name)
+	if not ProfileManager.delete_profile(target_profile):
+		push_error("Failed to delete profile '%s'." % target_profile.profile_name)
 	_refresh_profile_list()
 	_hide_confirm_delete_profile_window()
 

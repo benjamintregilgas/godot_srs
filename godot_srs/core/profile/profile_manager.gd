@@ -102,16 +102,15 @@ func load_profile(profile_name: String) -> Profile:
 	return profile
 
 
-## Deletes a profile with name [param profile_name] from memory and disk.
+## Deletes a profile from memory and disk.
 ## Returns [code]true[/code] if deletion succeeded.
-func delete_profile(profile_name: String) -> bool:
-	var profile: Profile = get_profile_by_name(profile_name)
+func delete_profile(profile: Profile) -> bool:
 	if profile == null:
 		return false
 	profiles.erase(profile)
 	profile_list_changed.emit()
 	var profiles_folder: String = PathManager.open_profiles_folder()
-	var profile_save_path: String = profiles_folder + profile_name + ".tres"
+	var profile_save_path: String = profiles_folder + profile.profile_name + ".tres"
 	var dir_access: DirAccess = DirAccess.open(profiles_folder)
 	if dir_access == null or not dir_access.file_exists(profile_save_path):
 		return true
@@ -130,15 +129,20 @@ func rename_profile(old_name: String, new_name: String) -> bool:
 	if not is_valid_profile_name(new_name):
 		push_error("Invalid profile_name: '%s'." % new_name)
 		return false
-	var old_profile_name: String = profile.profile_name
+	var profiles_folder: String = PathManager.open_profiles_folder()
+	var old_file_path = profiles_folder + old_name + ".tres"
 	profile.profile_name = new_name
 	var save_error: Error = save_profile(profile)
 	if save_error != OK:
 		push_error("Failed to save renamed profile '%s'." % new_name)
-		profile.profile_name = old_profile_name
+		profile.profile_name = old_name
 		return false
-	if not delete_profile(old_profile_name):
-		push_warning("Old profile '%s' could not be deleted.")
+	var dir_access: DirAccess = DirAccess.open(profiles_folder)
+	if dir_access == null or not dir_access.file_exists(old_file_path):
+		return false
+	var remove_error: Error = dir_access.remove(old_file_path)
+	if remove_error != OK:
+		push_error("Failed to delete profile at '%s'." % old_file_path)
 	profile_list_changed.emit()
 	return true
 

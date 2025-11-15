@@ -27,7 +27,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="ProfileSelect" type="Control" node_paths=PackedStringArray("profile_container", "open_profile_button", "rename_profile_button", "delete_profile_button", "add_profile_window", "add_profile_line_edit", "name_exists_window", "confirm_delete_profile_window", "confirm_delete_profile_prompt")]
+[node name="ProfileSelect" type="Control" node_paths=PackedStringArray("profile_container", "open_profile_button", "rename_profile_button", "delete_profile_button", "add_profile_window", "add_profile_line_edit", "name_exists_window", "rename_profile_window", "rename_profile_line_edit", "confirm_delete_profile_window", "confirm_delete_profile_prompt")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,6 +43,8 @@ profile_line_edit = ExtResource("2_4wfac")
 add_profile_window = NodePath("Windows/AddProfileWindow")
 add_profile_line_edit = NodePath("Windows/AddProfileWindow/Margin/Content/LineEdit")
 name_exists_window = NodePath("Windows/NameExistsWindow")
+rename_profile_window = NodePath("Windows/RenameProfileWindow")
+rename_profile_line_edit = NodePath("Windows/RenameProfileWindow/Margin/Content/LineEdit")
 confirm_delete_profile_window = NodePath("Windows/ConfirmDeleteProfileWindow")
 confirm_delete_profile_prompt = NodePath("Windows/ConfirmDeleteProfileWindow/Margin/Content/Title")
 
@@ -262,6 +264,76 @@ theme_override_styles/disabled = ExtResource("3_e6x43")
 theme_override_styles/focus = ExtResource("3_th740")
 text = "OK"
 
+[node name="RenameProfileWindow" type="Window" parent="Windows"]
+oversampling_override = 1.0
+title = "Rename Profile"
+initial_position = 1
+size = Vector2i(400, 115)
+visible = false
+exclusive = true
+unresizable = true
+force_native = true
+
+[node name="Backgrouind" type="ColorRect" parent="Windows/RenameProfileWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.17254902, 0.17254902, 0.17254902, 1)
+
+[node name="Margin" type="MarginContainer" parent="Windows/RenameProfileWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Content" type="VBoxContainer" parent="Windows/RenameProfileWindow/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="Windows/RenameProfileWindow/Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "New Name:"
+
+[node name="LineEdit" type="LineEdit" parent="Windows/RenameProfileWindow/Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_4wfac")
+theme_override_styles/focus = ExtResource("3_th740")
+
+[node name="Buttons" type="HBoxContainer" parent="Windows/RenameProfileWindow/Margin/Content"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 2
+
+[node name="RenameProfileClose" type="Button" parent="Windows/RenameProfileWindow/Margin/Content/Buttons"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_e5oy6")
+theme_override_styles/pressed = ExtResource("1_e5oy6")
+theme_override_styles/hover = ExtResource("2_th740")
+theme_override_styles/disabled = ExtResource("3_e6x43")
+theme_override_styles/focus = ExtResource("3_th740")
+text = "Cancel"
+
+[node name="RenameProfileConfirm" type="Button" parent="Windows/RenameProfileWindow/Margin/Content/Buttons"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_e5oy6")
+theme_override_styles/pressed = ExtResource("1_e5oy6")
+theme_override_styles/hover = ExtResource("2_th740")
+theme_override_styles/disabled = ExtResource("3_e6x43")
+theme_override_styles/focus = ExtResource("3_th740")
+text = "OK"
+
 [node name="ConfirmDeleteProfileWindow" type="Window" parent="Windows"]
 oversampling_override = 1.0
 title = "Confirm Delete Profile"
@@ -327,6 +399,7 @@ theme_override_styles/focus = ExtResource("3_th740")
 text = "Yes"
 
 [connection signal="pressed" from="Margin/Content/Options/AddProfile" to="." method="_on_add_profile_pressed"]
+[connection signal="pressed" from="Margin/Content/Options/RenameProfile" to="." method="_on_rename_profile_pressed"]
 [connection signal="pressed" from="Margin/Content/Options/DeleteProfile" to="." method="_on_delete_profile_pressed"]
 [connection signal="pressed" from="Margin/Content/Options/Quit" to="." method="_on_quit_pressed"]
 [connection signal="close_requested" from="Windows/AddProfileWindow" to="." method="_hide_add_profile_window"]
@@ -334,6 +407,9 @@ text = "Yes"
 [connection signal="pressed" from="Windows/AddProfileWindow/Margin/Content/Buttons/AddProfileConfirm" to="." method="_on_add_profile_confirm_pressed"]
 [connection signal="close_requested" from="Windows/NameExistsWindow" to="." method="_hide_name_exists_window"]
 [connection signal="pressed" from="Windows/NameExistsWindow/MarginContainer/Content/Button" to="." method="_hide_name_exists_window"]
+[connection signal="close_requested" from="Windows/RenameProfileWindow" to="." method="_hide_rename_profile_window"]
+[connection signal="pressed" from="Windows/RenameProfileWindow/Margin/Content/Buttons/RenameProfileClose" to="." method="_hide_rename_profile_window"]
+[connection signal="pressed" from="Windows/RenameProfileWindow/Margin/Content/Buttons/RenameProfileConfirm" to="." method="_on_rename_profile_confirm_pressed"]
 [connection signal="close_requested" from="Windows/ConfirmDeleteProfileWindow" to="." method="_hide_confirm_delete_profile_window"]
 [connection signal="pressed" from="Windows/ConfirmDeleteProfileWindow/Margin/Content/Buttons/DeleteProfileCancel" to="." method="_hide_confirm_delete_profile_window"]
 [connection signal="pressed" from="Windows/ConfirmDeleteProfileWindow/Margin/Content/Buttons/DeleteProfileConfirm" to="." method="_on_delete_profile_confirm_pressed"]
