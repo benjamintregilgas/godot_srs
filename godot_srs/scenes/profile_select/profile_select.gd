@@ -71,10 +71,16 @@ func _hide_add_profile_window() -> void:
 
 func _on_add_profile_confirm_pressed() -> void:
 	var new_name: String = add_profile_line_edit.text.strip_edges()
-	if new_name == null:
+	if new_name == "":
 		_hide_add_profile_window()
 		return
-	
+	if ProfileManager.get_profile_by_name(new_name) != null:
+		# TODO: Show name already exists window.
+		_hide_add_profile_window()
+		return
+	ProfileManager.create_profile(new_name)
+	_refresh_profile_list()
+	_hide_add_profile_window()
 
 # Quit
 func _on_quit_pressed() -> void:
