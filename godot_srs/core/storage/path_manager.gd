@@ -1,5 +1,5 @@
-extends Node
 class_name PathManager
+extends Node
 ## Handles path management for both the Godot editor and an exported build.
 ##
 ## All methods will return a path depending on if the project is run in 

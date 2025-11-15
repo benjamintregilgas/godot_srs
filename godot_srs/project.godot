@@ -15,11 +15,12 @@ config/description="GodotSRS is an Anki clone built with Godot, a flashcard prog
 config/use_custom_user_dir=true
 config/custom_user_dir_name="GodotSRS"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://cf0g1cxo6kiwn"
 
 [autoload]
 
 ProfileManager="*res://core/profile/profile_manager.gd"
+WindowManager="*res://core/window/window_manager.gd"
 
 [rendering]
 
