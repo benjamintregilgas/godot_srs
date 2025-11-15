@@ -69,6 +69,12 @@ func _hide_add_profile_window() -> void:
 	add_profile_line_edit.text = ""
 	add_profile_window.hide()
 
+func _on_add_profile_confirm_pressed() -> void:
+	var new_name: String = add_profile_line_edit.text.strip_edges()
+	if new_name == null:
+		_hide_add_profile_window()
+		return
+	
 
 # Quit
 func _on_quit_pressed() -> void:

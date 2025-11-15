@@ -147,11 +147,8 @@ title = "Add Profile"
 initial_position = 1
 size = Vector2i(400, 115)
 visible = false
-transient = true
-transient_to_focused = true
 exclusive = true
 unresizable = true
-popup_window = true
 force_native = true
 
 [node name="Backgrouind" type="ColorRect" parent="Windows/AddProfileWindow"]
@@ -195,7 +192,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 2
 
-[node name="Close" type="Button" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons"]
+[node name="AddProfileClose" type="Button" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("1_e5oy6")
@@ -205,7 +202,7 @@ theme_override_styles/disabled = ExtResource("3_e6x43")
 theme_override_styles/focus = ExtResource("3_th740")
 text = "Cancel"
 
-[node name="OK" type="Button" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons"]
+[node name="AddProfileConfirm" type="Button" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("1_e5oy6")
@@ -218,4 +215,5 @@ text = "OK"
 [connection signal="pressed" from="Margin/Content/Options/AddProfile" to="." method="_on_add_profile_pressed"]
 [connection signal="pressed" from="Margin/Content/Options/Quit" to="." method="_on_quit_pressed"]
 [connection signal="close_requested" from="Windows/AddProfileWindow" to="." method="_hide_add_profile_window"]
-[connection signal="pressed" from="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons/Close" to="." method="_hide_add_profile_window"]
+[connection signal="pressed" from="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons/AddProfileClose" to="." method="_hide_add_profile_window"]
+[connection signal="pressed" from="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons/AddProfileConfirm" to="." method="_on_add_profile_confirm_pressed"]
