@@ -23,7 +23,6 @@ extends Control
 ## Highlighted profile in [profile_container].
 var selected_profile: Profile = null
 
-
 ## Setup the window and refresh profile list.
 func _ready() -> void:
 	WindowManager.set_window("Profiles", Vector2i(425, 355), true, Vector2i(425, 155))
