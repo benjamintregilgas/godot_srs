@@ -12,6 +12,7 @@ config_version=5
 
 config/name="GodotSRS"
 config/description="GodotSRS is an Anki clone built with Godot, a flashcard program that helps you spend more time on challenging material, and less on what you already know."
+run/main_scene="uid://cya453cvropc7"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="GodotSRS"
 config/features=PackedStringArray("4.5", "GL Compatibility")

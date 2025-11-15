@@ -17,5 +17,4 @@ theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 theme_override_styles/read_only = SubResource("StyleBoxFlat_ishrq")
 theme_override_styles/focus = SubResource("StyleBoxFlat_e4wj7")
-text = "Testing"
 editable = false
