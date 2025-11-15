@@ -9,10 +9,8 @@ extends Node
 ## Returns folder path for profiles.
 static func _get_profiles_folder() -> String:
 	if OS.has_feature("editor"):
-		print("Using editor directory.")
 		return "res://data/profiles/"
 	else:
-		print("Using build directory.")
 		return "user://profiles/"
 
 ## Opens the folder path for profiles.

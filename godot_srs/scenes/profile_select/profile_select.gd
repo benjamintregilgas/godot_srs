@@ -16,7 +16,9 @@ extends Control
 @export var add_profile_line_edit: LineEdit
 @export_group("Name Exists Window")
 @export var name_exists_window: Window
-
+@export_group("Delete Profile Window")
+@export var confirm_delete_profile_window: Window
+@export var confirm_delete_profile_prompt: Label
 
 ## Highlighted profile in [profile_container].
 var selected_profile: Profile = null
@@ -53,15 +55,11 @@ func _refresh_profile_list() -> void:
 	for profile in sorted_profiles:
 		var profile_line_edit_instance = profile_line_edit.instantiate() as LineEdit
 		profile_line_edit_instance.text = profile.profile_name
-		profile_line_edit_instance.focus_exited.connect(
-			func():
-				selected_profile = null
-				_refresh_options_buttons(true)
-		)
-		profile_line_edit_instance.focus_entered.connect(
-			func():
-				selected_profile = profile
-				_refresh_options_buttons(false)
+		profile_line_edit_instance.gui_input.connect(
+			func(event: InputEvent):
+				if event is InputEventMouseButton and event.pressed:
+					selected_profile = profile
+					_refresh_options_buttons(false)
 		)
 		profile_container.add_child(profile_line_edit_instance)
 	
@@ -70,6 +68,7 @@ func _refresh_profile_list() -> void:
 
 # Add Profile
 func _on_add_profile_pressed() -> void:
+	_refresh_options_buttons(true)
 	add_profile_window.popup_centered()
 
 func _hide_add_profile_window() -> void:
@@ -92,6 +91,23 @@ func _on_add_profile_confirm_pressed() -> void:
 # Name Already Exists Window
 func _hide_name_exists_window() -> void:
 	name_exists_window.hide()
+
+# Delete Profile
+func _on_delete_profile_pressed() -> void:
+	_refresh_options_buttons(true)
+	confirm_delete_profile_prompt.text = "All cards, notes and media for the profile '%s' will be deleted. Are you sure?" % selected_profile.profile_name
+	confirm_delete_profile_window.popup_centered()
+
+func _hide_confirm_delete_profile_window() -> void:
+	confirm_delete_profile_window.hide()
+
+func _on_delete_profile_confirm_pressed() -> void:
+	var profile_name: String = selected_profile.profile_name
+	selected_profile = null
+	if not ProfileManager.delete_profile(profile_name):
+		push_error("Failed to delete profile '%s'." % profile_name)
+	_refresh_profile_list()
+	_hide_confirm_delete_profile_window()
 
 # Quit
 func _on_quit_pressed() -> void:
