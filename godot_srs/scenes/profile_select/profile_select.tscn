@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cya453cvropc7"]
+[gd_scene load_steps=9 format=3 uid="uid://cya453cvropc7"]
 
 [ext_resource type="Script" uid="uid://b1bpvxnped8pu" path="res://scenes/profile_select/profile_select.gd" id="1_5ad8p"]
 [ext_resource type="StyleBox" uid="uid://dnphpry3mcka6" path="res://ui/components/styleboxes/button/button_normal.tres" id="1_e5oy6"]
@@ -19,7 +19,15 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="ProfileSelect" type="Control" node_paths=PackedStringArray("profile_container", "open_profile_button", "rename_profile_button", "delete_profile_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wfac"]
+content_margin_left = 5.0
+bg_color = Color(0.14509805, 0.14509805, 0.14509805, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="ProfileSelect" type="Control" node_paths=PackedStringArray("profile_container", "open_profile_button", "rename_profile_button", "delete_profile_button", "add_profile_window", "add_profile_line_edit")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,10 +36,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5ad8p")
 profile_container = NodePath("Margin/Content/Profiles/ScrollContainer/VBoxContainer")
-open_profile_button = NodePath("Margin/Content/Options/Open")
-rename_profile_button = NodePath("Margin/Content/Options/Rename")
-delete_profile_button = NodePath("Margin/Content/Options/Delete")
+open_profile_button = NodePath("Margin/Content/Options/OpenProfile")
+rename_profile_button = NodePath("Margin/Content/Options/RenameProfile")
+delete_profile_button = NodePath("Margin/Content/Options/DeleteProfile")
 profile_line_edit = ExtResource("2_4wfac")
+add_profile_window = NodePath("Windows/AddProfileWindow")
+add_profile_line_edit = NodePath("Windows/AddProfileWindow/Backgrouind/Margin/Content/LineEdit")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -76,7 +86,7 @@ theme_override_constants/separation = 0
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="Open" type="Button" parent="Margin/Content/Options"]
+[node name="OpenProfile" type="Button" parent="Margin/Content/Options"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = ExtResource("1_e5oy6")
@@ -87,7 +97,7 @@ theme_override_styles/focus = ExtResource("3_th740")
 disabled = true
 text = "Open"
 
-[node name="Add" type="Button" parent="Margin/Content/Options"]
+[node name="AddProfile" type="Button" parent="Margin/Content/Options"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = ExtResource("1_e5oy6")
@@ -97,7 +107,7 @@ theme_override_styles/disabled = ExtResource("3_e6x43")
 theme_override_styles/focus = ExtResource("3_th740")
 text = "Add"
 
-[node name="Rename" type="Button" parent="Margin/Content/Options"]
+[node name="RenameProfile" type="Button" parent="Margin/Content/Options"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = ExtResource("1_e5oy6")
@@ -108,7 +118,7 @@ theme_override_styles/focus = ExtResource("3_th740")
 disabled = true
 text = "Rename"
 
-[node name="Delete" type="Button" parent="Margin/Content/Options"]
+[node name="DeleteProfile" type="Button" parent="Margin/Content/Options"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = ExtResource("1_e5oy6")
@@ -128,3 +138,82 @@ theme_override_styles/hover = ExtResource("2_th740")
 theme_override_styles/disabled = ExtResource("3_e6x43")
 theme_override_styles/focus = ExtResource("3_th740")
 text = "Quit"
+
+[node name="Windows" type="Node" parent="."]
+
+[node name="AddProfileWindow" type="Window" parent="Windows"]
+oversampling_override = 1.0
+title = "Add Profile"
+initial_position = 1
+size = Vector2i(400, 115)
+visible = false
+transient = true
+transient_to_focused = true
+exclusive = true
+unresizable = true
+popup_window = true
+force_native = true
+
+[node name="Backgrouind" type="ColorRect" parent="Windows/AddProfileWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.17254902, 0.17254902, 0.17254902, 1)
+
+[node name="Margin" type="MarginContainer" parent="Windows/AddProfileWindow/Backgrouind"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Content" type="VBoxContainer" parent="Windows/AddProfileWindow/Backgrouind/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Name:"
+
+[node name="LineEdit" type="LineEdit" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_4wfac")
+theme_override_styles/focus = ExtResource("3_th740")
+
+[node name="Buttons" type="HBoxContainer" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 2
+
+[node name="Close" type="Button" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_e5oy6")
+theme_override_styles/hover = ExtResource("2_th740")
+theme_override_styles/disabled = ExtResource("3_e6x43")
+theme_override_styles/focus = ExtResource("3_th740")
+text = "Cancel"
+
+[node name="OK" type="Button" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_e5oy6")
+theme_override_styles/hover = ExtResource("2_th740")
+theme_override_styles/disabled = ExtResource("3_e6x43")
+theme_override_styles/focus = ExtResource("3_th740")
+text = "OK"
+
+[connection signal="pressed" from="Margin/Content/Options/AddProfile" to="." method="_on_add_profile_pressed"]
+[connection signal="pressed" from="Margin/Content/Options/Quit" to="." method="_on_quit_pressed"]
+[connection signal="close_requested" from="Windows/AddProfileWindow" to="." method="_hide_add_profile_window"]
+[connection signal="pressed" from="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons/Close" to="." method="_hide_add_profile_window"]

@@ -11,6 +11,9 @@ extends Control
 @export var rename_profile_button: Button
 @export var delete_profile_button: Button
 @export var profile_line_edit: PackedScene
+@export_group("Add Profile Window")
+@export var add_profile_window: Window
+@export var add_profile_line_edit: LineEdit
 
 
 ## Highlighted profile in [profile_container].
@@ -55,3 +58,21 @@ func _refresh_profile_list() -> void:
 		)
 		profile_container.add_child(profile_line_edit_instance)
 	
+
+#region Options
+
+# Add Profile
+func _on_add_profile_pressed() -> void:
+	add_profile_window.popup_centered()
+
+func _hide_add_profile_window() -> void:
+	add_profile_line_edit.text = ""
+	add_profile_window.hide()
+
+
+# Quit
+func _on_quit_pressed() -> void:
+	get_tree().quit()
+
+
+#endregion
