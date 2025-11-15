@@ -27,7 +27,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="ProfileSelect" type="Control" node_paths=PackedStringArray("profile_container", "open_profile_button", "rename_profile_button", "delete_profile_button", "add_profile_window", "add_profile_line_edit")]
+[node name="ProfileSelect" type="Control" node_paths=PackedStringArray("profile_container", "open_profile_button", "rename_profile_button", "delete_profile_button", "add_profile_window", "add_profile_line_edit", "name_exists_window")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,9 +41,10 @@ rename_profile_button = NodePath("Margin/Content/Options/RenameProfile")
 delete_profile_button = NodePath("Margin/Content/Options/DeleteProfile")
 profile_line_edit = ExtResource("2_4wfac")
 add_profile_window = NodePath("Windows/AddProfileWindow")
-add_profile_line_edit = NodePath("Windows/AddProfileWindow/Backgrouind/Margin/Content/LineEdit")
+add_profile_line_edit = NodePath("Windows/AddProfileWindow/Margin/Content/LineEdit")
+name_exists_window = NodePath("Windows/NameExistsWindow")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -159,8 +160,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17254902, 0.17254902, 0.17254902, 1)
 
-[node name="Margin" type="MarginContainer" parent="Windows/AddProfileWindow/Backgrouind"]
-layout_mode = 1
+[node name="Margin" type="MarginContainer" parent="Windows/AddProfileWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -171,28 +171,28 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Content" type="VBoxContainer" parent="Windows/AddProfileWindow/Backgrouind/Margin"]
+[node name="Content" type="VBoxContainer" parent="Windows/AddProfileWindow/Margin"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Title" type="Label" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content"]
+[node name="Title" type="Label" parent="Windows/AddProfileWindow/Margin/Content"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Name:"
 
-[node name="LineEdit" type="LineEdit" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content"]
+[node name="LineEdit" type="LineEdit" parent="Windows/AddProfileWindow/Margin/Content"]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_styles/normal = SubResource("StyleBoxFlat_4wfac")
 theme_override_styles/focus = ExtResource("3_th740")
 
-[node name="Buttons" type="HBoxContainer" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content"]
+[node name="Buttons" type="HBoxContainer" parent="Windows/AddProfileWindow/Margin/Content"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 2
 
-[node name="AddProfileClose" type="Button" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons"]
+[node name="AddProfileClose" type="Button" parent="Windows/AddProfileWindow/Margin/Content/Buttons"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("1_e5oy6")
@@ -202,9 +202,57 @@ theme_override_styles/disabled = ExtResource("3_e6x43")
 theme_override_styles/focus = ExtResource("3_th740")
 text = "Cancel"
 
-[node name="AddProfileConfirm" type="Button" parent="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons"]
+[node name="AddProfileConfirm" type="Button" parent="Windows/AddProfileWindow/Margin/Content/Buttons"]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
+theme_override_styles/normal = ExtResource("1_e5oy6")
+theme_override_styles/pressed = ExtResource("1_e5oy6")
+theme_override_styles/hover = ExtResource("2_th740")
+theme_override_styles/disabled = ExtResource("3_e6x43")
+theme_override_styles/focus = ExtResource("3_th740")
+text = "OK"
+
+[node name="NameExistsWindow" type="Window" parent="Windows"]
+oversampling_override = 1.0
+title = "Warning"
+initial_position = 1
+size = Vector2i(185, 85)
+visible = false
+exclusive = true
+unresizable = true
+force_native = true
+
+[node name="Backgrouind" type="ColorRect" parent="Windows/NameExistsWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.17254902, 0.17254902, 0.17254902, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Windows/NameExistsWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Content" type="VBoxContainer" parent="Windows/NameExistsWindow/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="Windows/NameExistsWindow/MarginContainer/Content"]
+layout_mode = 2
+text = "Name already exists."
+
+[node name="Button" type="Button" parent="Windows/NameExistsWindow/MarginContainer/Content"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 8
 theme_override_styles/normal = ExtResource("1_e5oy6")
 theme_override_styles/pressed = ExtResource("1_e5oy6")
 theme_override_styles/hover = ExtResource("2_th740")
@@ -215,5 +263,7 @@ text = "OK"
 [connection signal="pressed" from="Margin/Content/Options/AddProfile" to="." method="_on_add_profile_pressed"]
 [connection signal="pressed" from="Margin/Content/Options/Quit" to="." method="_on_quit_pressed"]
 [connection signal="close_requested" from="Windows/AddProfileWindow" to="." method="_hide_add_profile_window"]
-[connection signal="pressed" from="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons/AddProfileClose" to="." method="_hide_add_profile_window"]
-[connection signal="pressed" from="Windows/AddProfileWindow/Backgrouind/Margin/Content/Buttons/AddProfileConfirm" to="." method="_on_add_profile_confirm_pressed"]
+[connection signal="pressed" from="Windows/AddProfileWindow/Margin/Content/Buttons/AddProfileClose" to="." method="_hide_add_profile_window"]
+[connection signal="pressed" from="Windows/AddProfileWindow/Margin/Content/Buttons/AddProfileConfirm" to="." method="_on_add_profile_confirm_pressed"]
+[connection signal="close_requested" from="Windows/NameExistsWindow" to="." method="_hide_name_exists_window"]
+[connection signal="pressed" from="Windows/NameExistsWindow/MarginContainer/Content/Button" to="." method="_hide_name_exists_window"]

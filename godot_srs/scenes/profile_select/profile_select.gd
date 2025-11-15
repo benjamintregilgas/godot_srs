@@ -14,6 +14,8 @@ extends Control
 @export_group("Add Profile Window")
 @export var add_profile_window: Window
 @export var add_profile_line_edit: LineEdit
+@export_group("Name Exists Window")
+@export var name_exists_window: Window
 
 
 ## Highlighted profile in [profile_container].
@@ -51,6 +53,11 @@ func _refresh_profile_list() -> void:
 	for profile in sorted_profiles:
 		var profile_line_edit_instance = profile_line_edit.instantiate() as LineEdit
 		profile_line_edit_instance.text = profile.profile_name
+		profile_line_edit_instance.focus_exited.connect(
+			func():
+				selected_profile = null
+				_refresh_options_buttons(true)
+		)
 		profile_line_edit_instance.focus_entered.connect(
 			func():
 				selected_profile = profile
@@ -59,7 +66,7 @@ func _refresh_profile_list() -> void:
 		profile_container.add_child(profile_line_edit_instance)
 	
 
-#region Options
+#region Options / Windows
 
 # Add Profile
 func _on_add_profile_pressed() -> void:
@@ -75,16 +82,19 @@ func _on_add_profile_confirm_pressed() -> void:
 		_hide_add_profile_window()
 		return
 	if ProfileManager.get_profile_by_name(new_name) != null:
-		# TODO: Show name already exists window.
 		_hide_add_profile_window()
+		name_exists_window.popup_centered()
 		return
 	ProfileManager.create_profile(new_name)
 	_refresh_profile_list()
 	_hide_add_profile_window()
 
+# Name Already Exists Window
+func _hide_name_exists_window() -> void:
+	name_exists_window.hide()
+
 # Quit
 func _on_quit_pressed() -> void:
 	get_tree().quit()
-
 
 #endregion
