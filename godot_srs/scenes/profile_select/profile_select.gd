@@ -22,6 +22,9 @@ extends Control
 @export_group("Delete Profile Window")
 @export var confirm_delete_profile_window: Window
 @export var confirm_delete_profile_prompt: Label
+@export_group("")
+@export_category("Scene Paths")
+@export_file_path("*.tscn", "*.scn") var main_screen_scene: String
 
 ## Highlighted profile in [profile_container].
 var selected_profile: Profile = null
@@ -67,6 +70,12 @@ func _refresh_profile_list() -> void:
 	
 
 #region Options / Windows
+
+# Open Profile
+func _on_open_profile_pressed() -> void:
+	if selected_profile:
+		ProfileManager.current_profile = selected_profile
+		WindowManager.switch_scene(main_screen_scene)
 
 # Add Profile
 func _on_add_profile_pressed() -> void:
