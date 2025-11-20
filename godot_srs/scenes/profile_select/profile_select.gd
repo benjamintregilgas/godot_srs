@@ -7,9 +7,9 @@ extends Control
 
 
 @export var profile_container: Container ## Populated [Container] containing selectable profiles.
-@export var open_profile_button: Button
-@export var rename_profile_button: Button
-@export var delete_profile_button: Button
+@export var open_profile_button: RichTextButton
+@export var rename_profile_button: RichTextButton
+@export var delete_profile_button: RichTextButton
 @export var profile_line_edit: PackedScene
 @export_group("Add Profile Window")
 @export var add_profile_window: Window
