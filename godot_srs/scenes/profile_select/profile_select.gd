@@ -2,7 +2,7 @@ extends Control
 ## Script for the ProfileSelect scene.
 ##
 ## Responsible for displaying existing profiles, and handling CRUD
-## actions. Integrates with WindowManager for window sizing and ProfileManmager
+## actions. Integrates with WindowManager for window sizing and ProfileManager
 ## for data access.
 
 
@@ -60,11 +60,18 @@ func _refresh_profile_list() -> void:
 	for profile in sorted_profiles:
 		var profile_line_edit_instance = profile_line_edit.instantiate() as LineEdit
 		profile_line_edit_instance.text = profile.profile_name
+		# Connect clicked signals to select profile.
 		profile_line_edit_instance.gui_input.connect(
 			func(event: InputEvent):
 				if event is InputEventMouseButton and event.pressed:
 					selected_profile = profile
 					_refresh_options_buttons(false)
+		)
+		# Connect focus entered signals to select profile. (Accessibility)
+		profile_line_edit_instance.focus_entered.connect(
+			func():
+				selected_profile = profile
+				_refresh_options_buttons(false)
 		)
 		profile_container.add_child(profile_line_edit_instance)
 	
