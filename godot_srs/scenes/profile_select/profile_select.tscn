@@ -1,12 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://cya453cvropc7"]
+[gd_scene load_steps=18 format=3 uid="uid://cya453cvropc7"]
 
 [ext_resource type="Script" uid="uid://b1bpvxnped8pu" path="res://scenes/profile_select/profile_select.gd" id="1_5ad8p"]
-[ext_resource type="StyleBox" uid="uid://dnphpry3mcka6" path="res://ui/components/styleboxes/button/button_normal.tres" id="1_e5oy6"]
 [ext_resource type="PackedScene" uid="uid://dgek1egr75vnb" path="res://scenes/profile_select/profile_line_edit.tscn" id="2_4wfac"]
-[ext_resource type="StyleBox" uid="uid://bg3hxsv1pke1h" path="res://ui/components/styleboxes/button/button_hover.tres" id="2_th740"]
-[ext_resource type="StyleBox" uid="uid://dxofbjhud7dpd" path="res://ui/components/styleboxes/button/button_disabled.tres" id="3_e6x43"]
 [ext_resource type="StyleBox" uid="uid://dwnat5a0if2ln" path="res://ui/components/styleboxes/button/button_focus.tres" id="3_th740"]
 [ext_resource type="Script" uid="uid://bxlpdrhar4mgf" path="res://addons/rich_text_button/rich_text_button.gd" id="7_maioh"]
+[ext_resource type="Theme" uid="uid://clvybwwkq41ay" path="res://ui/components/styleboxes/button/button.tres" id="8_fqfec"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5kwe"]
 content_margin_left = 0.0
@@ -19,24 +17,6 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
-
-[sub_resource type="Theme" id="Theme_fqfec"]
-RichTextButton/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
-RichTextButton/colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 0.5019608)
-RichTextButton/colors/font_focus_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
-RichTextButton/colors/font_hover_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
-RichTextButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-RichTextButton/colors/font_outline_color = Color(0, 0, 0, 1)
-RichTextButton/colors/font_pressed_color = Color(1, 1, 1, 1)
-RichTextButton/constants/outline_size = 0
-RichTextButton/font_sizes/font_size = 14
-RichTextButton/fonts/font = null
-RichTextButton/styles/disabled = ExtResource("3_e6x43")
-RichTextButton/styles/focus = ExtResource("3_th740")
-RichTextButton/styles/hover = ExtResource("2_th740")
-RichTextButton/styles/hover_pressed = null
-RichTextButton/styles/normal = ExtResource("1_e5oy6")
-RichTextButton/styles/pressed = ExtResource("1_e5oy6")
 
 [sub_resource type="InputEventKey" id="InputEventKey_maioh"]
 device = -1
@@ -99,18 +79,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5ad8p")
-profile_container = NodePath("Margin/Content/Profiles/ScrollContainer/VBoxContainer")
-open_profile_button = NodePath("Margin/Content/Options/OpenProfile")
-rename_profile_button = NodePath("Margin/Content/Options/RenameProfile")
-delete_profile_button = NodePath("Margin/Content/Options/DeleteProfile")
+profile_container = NodePath("MainWindow/Content/Profiles/ScrollContainer/VBoxContainer")
+open_profile_button = NodePath("MainWindow/Content/Options/OpenProfile")
+rename_profile_button = NodePath("MainWindow/Content/Options/RenameProfile")
+delete_profile_button = NodePath("MainWindow/Content/Options/DeleteProfile")
 profile_line_edit = ExtResource("2_4wfac")
-add_profile_window = NodePath("Windows/AddProfileWindow")
-add_profile_line_edit = NodePath("Windows/AddProfileWindow/Margin/Content/LineEdit")
-name_exists_window = NodePath("Windows/NameExistsWindow")
-rename_profile_window = NodePath("Windows/RenameProfileWindow")
-rename_profile_line_edit = NodePath("Windows/RenameProfileWindow/Margin/Content/LineEdit")
-confirm_delete_profile_window = NodePath("Windows/ConfirmDeleteProfileWindow")
-confirm_delete_profile_prompt = NodePath("Windows/ConfirmDeleteProfileWindow/Margin/Content/Title")
+add_profile_window = NodePath("SubWindows/AddProfileWindow")
+add_profile_line_edit = NodePath("SubWindows/AddProfileWindow/Margin/Content/LineEdit")
+name_exists_window = NodePath("SubWindows/NameExistsWindow")
+rename_profile_window = NodePath("SubWindows/RenameProfileWindow")
+rename_profile_line_edit = NodePath("SubWindows/RenameProfileWindow/Margin/Content/LineEdit")
+confirm_delete_profile_window = NodePath("SubWindows/ConfirmDeleteProfileWindow")
+confirm_delete_profile_prompt = NodePath("SubWindows/ConfirmDeleteProfileWindow/Margin/Content/Title")
 main_screen_scene = "res://scenes/main_screen/main_screen.tscn"
 
 [node name="Background" type="ColorRect" parent="."]
@@ -122,7 +102,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17254902, 0.17254902, 0.17254902, 1)
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="MainWindow" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -134,29 +114,29 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Content" type="HBoxContainer" parent="Margin"]
+[node name="Content" type="HBoxContainer" parent="MainWindow"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Profiles" type="PanelContainer" parent="Margin/Content"]
+[node name="Profiles" type="PanelContainer" parent="MainWindow/Content"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_s5kwe")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Margin/Content/Profiles"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainWindow/Content/Profiles"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Margin/Content/Profiles/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainWindow/Content/Profiles/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="Options" type="VBoxContainer" parent="Margin/Content"]
+[node name="Options" type="VBoxContainer" parent="MainWindow/Content"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="OpenProfile" type="BaseButton" parent="Margin/Content/Options"]
+[node name="OpenProfile" type="BaseButton" parent="MainWindow/Content/Options"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -210,7 +190,7 @@ accessibility_controls_nodes = Array[NodePath]([])
 accessibility_described_by_nodes = Array[NodePath]([])
 accessibility_labeled_by_nodes = Array[NodePath]([])
 accessibility_flow_to_nodes = Array[NodePath]([])
-theme = SubResource("Theme_fqfec")
+theme = ExtResource("8_fqfec")
 theme_type_variation = &""
 disabled = true
 toggle_mode = false
@@ -223,12 +203,12 @@ shortcut = SubResource("Shortcut_fqfec")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
-theme_resource = SubResource("Theme_fqfec")
+theme_resource = ExtResource("8_fqfec")
 bbcode_enabled = true
 text = "[u]O[/u]pen"
 metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="AddProfile" type="BaseButton" parent="Margin/Content/Options"]
+[node name="AddProfile" type="BaseButton" parent="MainWindow/Content/Options"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -282,7 +262,7 @@ accessibility_controls_nodes = Array[NodePath]([])
 accessibility_described_by_nodes = Array[NodePath]([])
 accessibility_labeled_by_nodes = Array[NodePath]([])
 accessibility_flow_to_nodes = Array[NodePath]([])
-theme = SubResource("Theme_fqfec")
+theme = ExtResource("8_fqfec")
 theme_type_variation = &""
 disabled = false
 toggle_mode = false
@@ -295,12 +275,12 @@ shortcut = SubResource("Shortcut_i7ybx")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
-theme_resource = SubResource("Theme_fqfec")
+theme_resource = ExtResource("8_fqfec")
 bbcode_enabled = true
 text = "[u]A[/u]dd"
 metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="RenameProfile" type="BaseButton" parent="Margin/Content/Options"]
+[node name="RenameProfile" type="BaseButton" parent="MainWindow/Content/Options"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -354,7 +334,7 @@ accessibility_controls_nodes = Array[NodePath]([])
 accessibility_described_by_nodes = Array[NodePath]([])
 accessibility_labeled_by_nodes = Array[NodePath]([])
 accessibility_flow_to_nodes = Array[NodePath]([])
-theme = SubResource("Theme_fqfec")
+theme = ExtResource("8_fqfec")
 theme_type_variation = &""
 disabled = true
 toggle_mode = false
@@ -367,12 +347,12 @@ shortcut = SubResource("Shortcut_whtjw")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
-theme_resource = SubResource("Theme_fqfec")
+theme_resource = ExtResource("8_fqfec")
 bbcode_enabled = true
 text = "[u]R[/u]ename"
 metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="DeleteProfile" type="BaseButton" parent="Margin/Content/Options"]
+[node name="DeleteProfile" type="BaseButton" parent="MainWindow/Content/Options"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -426,7 +406,7 @@ accessibility_controls_nodes = Array[NodePath]([])
 accessibility_described_by_nodes = Array[NodePath]([])
 accessibility_labeled_by_nodes = Array[NodePath]([])
 accessibility_flow_to_nodes = Array[NodePath]([])
-theme = SubResource("Theme_fqfec")
+theme = ExtResource("8_fqfec")
 theme_type_variation = &""
 disabled = true
 toggle_mode = false
@@ -439,12 +419,12 @@ shortcut = SubResource("Shortcut_m6efw")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
-theme_resource = SubResource("Theme_fqfec")
+theme_resource = ExtResource("8_fqfec")
 bbcode_enabled = true
 text = "[u]D[/u]elete"
 metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="Quit" type="BaseButton" parent="Margin/Content/Options"]
+[node name="Quit" type="BaseButton" parent="MainWindow/Content/Options"]
 _import_path = NodePath("")
 unique_name_in_owner = false
 process_mode = 0
@@ -498,7 +478,7 @@ accessibility_controls_nodes = Array[NodePath]([])
 accessibility_described_by_nodes = Array[NodePath]([])
 accessibility_labeled_by_nodes = Array[NodePath]([])
 accessibility_flow_to_nodes = Array[NodePath]([])
-theme = SubResource("Theme_fqfec")
+theme = ExtResource("8_fqfec")
 theme_type_variation = &""
 disabled = false
 toggle_mode = false
@@ -511,14 +491,14 @@ shortcut = SubResource("Shortcut_aovju")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
-theme_resource = SubResource("Theme_fqfec")
+theme_resource = ExtResource("8_fqfec")
 bbcode_enabled = true
 text = "[u]Q[/u]uit"
 metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="Windows" type="Node" parent="."]
+[node name="SubWindows" type="Node" parent="."]
 
-[node name="AddProfileWindow" type="Window" parent="Windows"]
+[node name="AddProfileWindow" type="Window" parent="SubWindows"]
 oversampling_override = 1.0
 title = "Add Profile"
 initial_position = 1
@@ -528,7 +508,7 @@ exclusive = true
 unresizable = true
 force_native = true
 
-[node name="Backgrouind" type="ColorRect" parent="Windows/AddProfileWindow"]
+[node name="Backgrouind" type="ColorRect" parent="SubWindows/AddProfileWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -536,7 +516,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17254902, 0.17254902, 0.17254902, 1)
 
-[node name="Margin" type="MarginContainer" parent="Windows/AddProfileWindow"]
+[node name="Margin" type="MarginContainer" parent="SubWindows/AddProfileWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -547,58 +527,182 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Content" type="VBoxContainer" parent="Windows/AddProfileWindow/Margin"]
+[node name="Content" type="VBoxContainer" parent="SubWindows/AddProfileWindow/Margin"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Title" type="Label" parent="Windows/AddProfileWindow/Margin/Content"]
+[node name="Title" type="Label" parent="SubWindows/AddProfileWindow/Margin/Content"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Name:"
 
-[node name="LineEdit" type="LineEdit" parent="Windows/AddProfileWindow/Margin/Content"]
+[node name="LineEdit" type="LineEdit" parent="SubWindows/AddProfileWindow/Margin/Content"]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_styles/normal = SubResource("StyleBoxFlat_4wfac")
 theme_override_styles/focus = ExtResource("3_th740")
 
-[node name="Buttons" type="HBoxContainer" parent="Windows/AddProfileWindow/Margin/Content"]
+[node name="Buttons" type="HBoxContainer" parent="SubWindows/AddProfileWindow/Margin/Content"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 2
 
-[node name="AddProfileClose" type="Button" parent="Windows/AddProfileWindow/Margin/Content/Buttons"]
-custom_minimum_size = Vector2(75, 0)
+[node name="AddProfileClose" type="BaseButton" parent="SubWindows/AddProfileWindow/Margin/Content/Buttons"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(75, 24)
+layout_direction = 0
 layout_mode = 2
-theme_override_styles/normal = ExtResource("1_e5oy6")
-theme_override_styles/pressed = ExtResource("1_e5oy6")
-theme_override_styles/hover = ExtResource("2_th740")
-theme_override_styles/disabled = ExtResource("3_e6x43")
-theme_override_styles/focus = ExtResource("3_th740")
-text = "Cancel"
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = ExtResource("8_fqfec")
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_maioh")
+theme_resource = ExtResource("8_fqfec")
+bbcode_enabled = true
+text = "[u]C[/u]ancel"
+metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="AddProfileConfirm" type="Button" parent="Windows/AddProfileWindow/Margin/Content/Buttons"]
-custom_minimum_size = Vector2(75, 0)
+[node name="AddProfileConfirm" type="BaseButton" parent="SubWindows/AddProfileWindow/Margin/Content/Buttons"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(75, 24)
+layout_direction = 0
 layout_mode = 2
-theme_override_styles/normal = ExtResource("1_e5oy6")
-theme_override_styles/pressed = ExtResource("1_e5oy6")
-theme_override_styles/hover = ExtResource("2_th740")
-theme_override_styles/disabled = ExtResource("3_e6x43")
-theme_override_styles/focus = ExtResource("3_th740")
-text = "OK"
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = ExtResource("8_fqfec")
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_maioh")
+theme_resource = ExtResource("8_fqfec")
+bbcode_enabled = true
+text = "[u]O[/u]K"
+metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="NameExistsWindow" type="Window" parent="Windows"]
+[node name="NameExistsWindow" type="Window" parent="SubWindows"]
 oversampling_override = 1.0
 title = "Warning"
 initial_position = 1
-size = Vector2i(185, 85)
+size = Vector2i(185, 70)
 visible = false
 exclusive = true
 unresizable = true
 force_native = true
 
-[node name="Backgrouind" type="ColorRect" parent="Windows/NameExistsWindow"]
+[node name="Backgrouind" type="ColorRect" parent="SubWindows/NameExistsWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -606,7 +710,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17254902, 0.17254902, 0.17254902, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="Windows/NameExistsWindow"]
+[node name="MarginContainer" type="MarginContainer" parent="SubWindows/NameExistsWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -617,26 +721,87 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Content" type="VBoxContainer" parent="Windows/NameExistsWindow/MarginContainer"]
+[node name="Content" type="VBoxContainer" parent="SubWindows/NameExistsWindow/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Title" type="Label" parent="Windows/NameExistsWindow/MarginContainer/Content"]
+[node name="Title" type="Label" parent="SubWindows/NameExistsWindow/MarginContainer/Content"]
 layout_mode = 2
 text = "Name already exists."
 
-[node name="Button" type="Button" parent="Windows/NameExistsWindow/MarginContainer/Content"]
-custom_minimum_size = Vector2(50, 0)
+[node name="Confirm" type="BaseButton" parent="SubWindows/NameExistsWindow/MarginContainer/Content"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(50, 24)
+layout_direction = 0
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_styles/normal = ExtResource("1_e5oy6")
-theme_override_styles/pressed = ExtResource("1_e5oy6")
-theme_override_styles/hover = ExtResource("2_th740")
-theme_override_styles/disabled = ExtResource("3_e6x43")
-theme_override_styles/focus = ExtResource("3_th740")
-text = "OK"
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = ExtResource("8_fqfec")
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_maioh")
+theme_resource = ExtResource("8_fqfec")
+bbcode_enabled = true
+text = "[u]O[/u]K"
+metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="RenameProfileWindow" type="Window" parent="Windows"]
+[node name="RenameProfileWindow" type="Window" parent="SubWindows"]
 oversampling_override = 1.0
 title = "Rename Profile"
 initial_position = 1
@@ -646,7 +811,7 @@ exclusive = true
 unresizable = true
 force_native = true
 
-[node name="Backgrouind" type="ColorRect" parent="Windows/RenameProfileWindow"]
+[node name="Backgrouind" type="ColorRect" parent="SubWindows/RenameProfileWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -654,7 +819,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17254902, 0.17254902, 0.17254902, 1)
 
-[node name="Margin" type="MarginContainer" parent="Windows/RenameProfileWindow"]
+[node name="Margin" type="MarginContainer" parent="SubWindows/RenameProfileWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -665,58 +830,182 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Content" type="VBoxContainer" parent="Windows/RenameProfileWindow/Margin"]
+[node name="Content" type="VBoxContainer" parent="SubWindows/RenameProfileWindow/Margin"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Title" type="Label" parent="Windows/RenameProfileWindow/Margin/Content"]
+[node name="Title" type="Label" parent="SubWindows/RenameProfileWindow/Margin/Content"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "New Name:"
 
-[node name="LineEdit" type="LineEdit" parent="Windows/RenameProfileWindow/Margin/Content"]
+[node name="LineEdit" type="LineEdit" parent="SubWindows/RenameProfileWindow/Margin/Content"]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_styles/normal = SubResource("StyleBoxFlat_4wfac")
 theme_override_styles/focus = ExtResource("3_th740")
 
-[node name="Buttons" type="HBoxContainer" parent="Windows/RenameProfileWindow/Margin/Content"]
+[node name="Buttons" type="HBoxContainer" parent="SubWindows/RenameProfileWindow/Margin/Content"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 2
 
-[node name="RenameProfileClose" type="Button" parent="Windows/RenameProfileWindow/Margin/Content/Buttons"]
-custom_minimum_size = Vector2(75, 0)
+[node name="RenameProfileClose" type="BaseButton" parent="SubWindows/RenameProfileWindow/Margin/Content/Buttons"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(75, 24)
+layout_direction = 0
 layout_mode = 2
-theme_override_styles/normal = ExtResource("1_e5oy6")
-theme_override_styles/pressed = ExtResource("1_e5oy6")
-theme_override_styles/hover = ExtResource("2_th740")
-theme_override_styles/disabled = ExtResource("3_e6x43")
-theme_override_styles/focus = ExtResource("3_th740")
-text = "Cancel"
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = ExtResource("8_fqfec")
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_maioh")
+theme_resource = ExtResource("8_fqfec")
+bbcode_enabled = true
+text = "[u]C[/u]ancel"
+metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="RenameProfileConfirm" type="Button" parent="Windows/RenameProfileWindow/Margin/Content/Buttons"]
-custom_minimum_size = Vector2(75, 0)
+[node name="RenameProfileConfirm" type="BaseButton" parent="SubWindows/RenameProfileWindow/Margin/Content/Buttons"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(75, 24)
+layout_direction = 0
 layout_mode = 2
-theme_override_styles/normal = ExtResource("1_e5oy6")
-theme_override_styles/pressed = ExtResource("1_e5oy6")
-theme_override_styles/hover = ExtResource("2_th740")
-theme_override_styles/disabled = ExtResource("3_e6x43")
-theme_override_styles/focus = ExtResource("3_th740")
-text = "OK"
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = ExtResource("8_fqfec")
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_maioh")
+theme_resource = ExtResource("8_fqfec")
+bbcode_enabled = true
+text = "[u]O[/u]K"
+metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="ConfirmDeleteProfileWindow" type="Window" parent="Windows"]
+[node name="ConfirmDeleteProfileWindow" type="Window" parent="SubWindows"]
 oversampling_override = 1.0
 title = "Confirm Delete Profile"
 initial_position = 1
-size = Vector2i(400, 115)
+size = Vector2i(400, 100)
 visible = false
 exclusive = true
 unresizable = true
 force_native = true
 
-[node name="Backgrouind" type="ColorRect" parent="Windows/ConfirmDeleteProfileWindow"]
+[node name="Backgrouind" type="ColorRect" parent="SubWindows/ConfirmDeleteProfileWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -724,7 +1013,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17254902, 0.17254902, 0.17254902, 1)
 
-[node name="Margin" type="MarginContainer" parent="Windows/ConfirmDeleteProfileWindow"]
+[node name="Margin" type="MarginContainer" parent="SubWindows/ConfirmDeleteProfileWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -735,54 +1024,178 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Content" type="VBoxContainer" parent="Windows/ConfirmDeleteProfileWindow/Margin"]
+[node name="Content" type="VBoxContainer" parent="SubWindows/ConfirmDeleteProfileWindow/Margin"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Title" type="Label" parent="Windows/ConfirmDeleteProfileWindow/Margin/Content"]
+[node name="Title" type="Label" parent="SubWindows/ConfirmDeleteProfileWindow/Margin/Content"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "All cards, notes and media for the profile '%s' will be deleted. Are you sure?"
 autowrap_mode = 3
 
-[node name="Buttons" type="HBoxContainer" parent="Windows/ConfirmDeleteProfileWindow/Margin/Content"]
+[node name="Buttons" type="HBoxContainer" parent="SubWindows/ConfirmDeleteProfileWindow/Margin/Content"]
 layout_mode = 2
 size_flags_horizontal = 8
 alignment = 2
 
-[node name="DeleteProfileCancel" type="Button" parent="Windows/ConfirmDeleteProfileWindow/Margin/Content/Buttons"]
-custom_minimum_size = Vector2(50, 0)
+[node name="DeleteProfileCancel" type="BaseButton" parent="SubWindows/ConfirmDeleteProfileWindow/Margin/Content/Buttons"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(75, 24)
+layout_direction = 0
 layout_mode = 2
-theme_override_styles/normal = ExtResource("1_e5oy6")
-theme_override_styles/pressed = ExtResource("1_e5oy6")
-theme_override_styles/hover = ExtResource("2_th740")
-theme_override_styles/disabled = ExtResource("3_e6x43")
-theme_override_styles/focus = ExtResource("3_th740")
-text = "No"
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = ExtResource("8_fqfec")
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_maioh")
+theme_resource = ExtResource("8_fqfec")
+bbcode_enabled = true
+text = "[u]C[/u]ancel"
+metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[node name="DeleteProfileConfirm" type="Button" parent="Windows/ConfirmDeleteProfileWindow/Margin/Content/Buttons"]
-custom_minimum_size = Vector2(50, 0)
+[node name="DeleteProfileConfirm" type="BaseButton" parent="SubWindows/ConfirmDeleteProfileWindow/Margin/Content/Buttons"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(75, 24)
+layout_direction = 0
 layout_mode = 2
-theme_override_styles/normal = ExtResource("1_e5oy6")
-theme_override_styles/pressed = ExtResource("1_e5oy6")
-theme_override_styles/hover = ExtResource("2_th740")
-theme_override_styles/disabled = ExtResource("3_e6x43")
-theme_override_styles/focus = ExtResource("3_th740")
-text = "Yes"
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+tooltip_auto_translate_mode = 0
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+focus_behavior_recursive = 0
+mouse_filter = 0
+mouse_behavior_recursive = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+theme = ExtResource("8_fqfec")
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("7_maioh")
+theme_resource = ExtResource("8_fqfec")
+bbcode_enabled = true
+text = "[u]O[/u]K"
+metadata/_custom_type_script = "uid://bxlpdrhar4mgf"
 
-[connection signal="pressed" from="Margin/Content/Options/OpenProfile" to="." method="_on_open_profile_pressed"]
-[connection signal="pressed" from="Margin/Content/Options/AddProfile" to="." method="_on_add_profile_pressed"]
-[connection signal="pressed" from="Margin/Content/Options/RenameProfile" to="." method="_on_rename_profile_pressed"]
-[connection signal="pressed" from="Margin/Content/Options/DeleteProfile" to="." method="_on_delete_profile_pressed"]
-[connection signal="pressed" from="Margin/Content/Options/Quit" to="." method="_on_quit_pressed"]
-[connection signal="close_requested" from="Windows/AddProfileWindow" to="." method="_hide_add_profile_window"]
-[connection signal="pressed" from="Windows/AddProfileWindow/Margin/Content/Buttons/AddProfileClose" to="." method="_hide_add_profile_window"]
-[connection signal="pressed" from="Windows/AddProfileWindow/Margin/Content/Buttons/AddProfileConfirm" to="." method="_on_add_profile_confirm_pressed"]
-[connection signal="close_requested" from="Windows/NameExistsWindow" to="." method="_hide_name_exists_window"]
-[connection signal="pressed" from="Windows/NameExistsWindow/MarginContainer/Content/Button" to="." method="_hide_name_exists_window"]
-[connection signal="close_requested" from="Windows/RenameProfileWindow" to="." method="_hide_rename_profile_window"]
-[connection signal="pressed" from="Windows/RenameProfileWindow/Margin/Content/Buttons/RenameProfileClose" to="." method="_hide_rename_profile_window"]
-[connection signal="pressed" from="Windows/RenameProfileWindow/Margin/Content/Buttons/RenameProfileConfirm" to="." method="_on_rename_profile_confirm_pressed"]
-[connection signal="close_requested" from="Windows/ConfirmDeleteProfileWindow" to="." method="_hide_confirm_delete_profile_window"]
-[connection signal="pressed" from="Windows/ConfirmDeleteProfileWindow/Margin/Content/Buttons/DeleteProfileCancel" to="." method="_hide_confirm_delete_profile_window"]
-[connection signal="pressed" from="Windows/ConfirmDeleteProfileWindow/Margin/Content/Buttons/DeleteProfileConfirm" to="." method="_on_delete_profile_confirm_pressed"]
+[connection signal="pressed" from="MainWindow/Content/Options/OpenProfile" to="." method="_on_open_profile_pressed"]
+[connection signal="pressed" from="MainWindow/Content/Options/AddProfile" to="." method="_on_add_profile_pressed"]
+[connection signal="pressed" from="MainWindow/Content/Options/RenameProfile" to="." method="_on_rename_profile_pressed"]
+[connection signal="pressed" from="MainWindow/Content/Options/DeleteProfile" to="." method="_on_delete_profile_pressed"]
+[connection signal="pressed" from="MainWindow/Content/Options/Quit" to="." method="_on_quit_pressed"]
+[connection signal="close_requested" from="SubWindows/AddProfileWindow" to="." method="_hide_add_profile_window"]
+[connection signal="pressed" from="SubWindows/AddProfileWindow/Margin/Content/Buttons/AddProfileClose" to="." method="_hide_add_profile_window"]
+[connection signal="pressed" from="SubWindows/AddProfileWindow/Margin/Content/Buttons/AddProfileConfirm" to="." method="_on_add_profile_confirm_pressed"]
+[connection signal="close_requested" from="SubWindows/NameExistsWindow" to="." method="_hide_name_exists_window"]
+[connection signal="pressed" from="SubWindows/NameExistsWindow/MarginContainer/Content/Confirm" to="." method="_hide_name_exists_window"]
+[connection signal="close_requested" from="SubWindows/RenameProfileWindow" to="." method="_hide_rename_profile_window"]
+[connection signal="pressed" from="SubWindows/RenameProfileWindow/Margin/Content/Buttons/RenameProfileClose" to="." method="_hide_rename_profile_window"]
+[connection signal="pressed" from="SubWindows/RenameProfileWindow/Margin/Content/Buttons/RenameProfileConfirm" to="." method="_on_rename_profile_confirm_pressed"]
+[connection signal="close_requested" from="SubWindows/ConfirmDeleteProfileWindow" to="." method="_hide_confirm_delete_profile_window"]
+[connection signal="pressed" from="SubWindows/ConfirmDeleteProfileWindow/Margin/Content/Buttons/DeleteProfileCancel" to="." method="_hide_confirm_delete_profile_window"]
+[connection signal="pressed" from="SubWindows/ConfirmDeleteProfileWindow/Margin/Content/Buttons/DeleteProfileConfirm" to="." method="_on_delete_profile_confirm_pressed"]

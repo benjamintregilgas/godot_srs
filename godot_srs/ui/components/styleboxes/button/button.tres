@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://clvybwwkq41ay"]
+
+[ext_resource type="StyleBox" uid="uid://dxofbjhud7dpd" path="res://ui/components/styleboxes/button/button_disabled.tres" id="1_popw1"]
+[ext_resource type="StyleBox" uid="uid://dwnat5a0if2ln" path="res://ui/components/styleboxes/button/button_focus.tres" id="2_5b2ar"]
+[ext_resource type="StyleBox" uid="uid://bg3hxsv1pke1h" path="res://ui/components/styleboxes/button/button_hover.tres" id="3_4dglb"]
+[ext_resource type="StyleBox" uid="uid://dnphpry3mcka6" path="res://ui/components/styleboxes/button/button_normal.tres" id="4_wqf02"]
+
+[resource]
+RichTextButton/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+RichTextButton/colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 0.5019608)
+RichTextButton/colors/font_focus_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+RichTextButton/colors/font_hover_color = Color(0.9490196, 0.9490196, 0.9490196, 1)
+RichTextButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+RichTextButton/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextButton/colors/font_pressed_color = Color(1, 1, 1, 1)
+RichTextButton/constants/outline_size = 0
+RichTextButton/font_sizes/font_size = 14
+RichTextButton/fonts/font = null
+RichTextButton/styles/disabled = ExtResource("1_popw1")
+RichTextButton/styles/focus = ExtResource("2_5b2ar")
+RichTextButton/styles/hover = ExtResource("3_4dglb")
+RichTextButton/styles/hover_pressed = null
+RichTextButton/styles/normal = ExtResource("4_wqf02")
+RichTextButton/styles/pressed = ExtResource("4_wqf02")
