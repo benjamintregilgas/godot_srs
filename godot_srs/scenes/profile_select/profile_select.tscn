@@ -1,10 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://cya453cvropc7"]
+[gd_scene load_steps=14 format=3 uid="uid://cya453cvropc7"]
 
 [ext_resource type="Script" uid="uid://b1bpvxnped8pu" path="res://scenes/profile_select/profile_select.gd" id="1_5ad8p"]
 [ext_resource type="PackedScene" uid="uid://dgek1egr75vnb" path="res://scenes/profile_select/profile_line_edit.tscn" id="2_4wfac"]
 [ext_resource type="StyleBox" uid="uid://dwnat5a0if2ln" path="res://ui/components/styleboxes/button/button_focus.tres" id="3_th740"]
+[ext_resource type="Shortcut" uid="uid://cxrtt4w76jqhl" path="res://ui/components/shortcuts/Ctrl+O.tres" id="4_4wfac"]
+[ext_resource type="Shortcut" uid="uid://usvr3ot5jqb2" path="res://ui/components/shortcuts/Ctrl+A.tres" id="6_fqfec"]
+[ext_resource type="Shortcut" uid="uid://c30ucvrx17d73" path="res://ui/components/shortcuts/Ctrl+C.tres" id="7_fqfec"]
+[ext_resource type="Shortcut" uid="uid://ckl4f5ojwi6ar" path="res://ui/components/shortcuts/Ctrl+R.tres" id="7_i7ybx"]
 [ext_resource type="Script" uid="uid://bxlpdrhar4mgf" path="res://addons/rich_text_button/rich_text_button.gd" id="7_maioh"]
 [ext_resource type="Theme" uid="uid://clvybwwkq41ay" path="res://ui/components/styleboxes/button/button.tres" id="8_fqfec"]
+[ext_resource type="Shortcut" uid="uid://c268jjesnddx1" path="res://ui/components/shortcuts/Ctrl+D.tres" id="8_m6efw"]
+[ext_resource type="Shortcut" uid="uid://teoq6i1hg4sg" path="res://ui/components/shortcuts/Ctrl+Q.tres" id="9_whtjw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5kwe"]
 content_margin_left = 0.0
@@ -17,51 +23,6 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
-
-[sub_resource type="InputEventKey" id="InputEventKey_maioh"]
-device = -1
-command_or_control_autoremap = true
-keycode = 79
-unicode = 111
-
-[sub_resource type="Shortcut" id="Shortcut_fqfec"]
-events = [SubResource("InputEventKey_maioh")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_fqfec"]
-device = -1
-command_or_control_autoremap = true
-keycode = 65
-unicode = 97
-
-[sub_resource type="Shortcut" id="Shortcut_i7ybx"]
-events = [SubResource("InputEventKey_fqfec")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_m6efw"]
-device = -1
-command_or_control_autoremap = true
-keycode = 82
-unicode = 114
-
-[sub_resource type="Shortcut" id="Shortcut_whtjw"]
-events = [SubResource("InputEventKey_m6efw")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_i7ybx"]
-device = -1
-command_or_control_autoremap = true
-keycode = 68
-unicode = 100
-
-[sub_resource type="Shortcut" id="Shortcut_m6efw"]
-events = [SubResource("InputEventKey_i7ybx")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_whtjw"]
-device = -1
-command_or_control_autoremap = true
-keycode = 81
-unicode = 113
-
-[sub_resource type="Shortcut" id="Shortcut_aovju"]
-events = [SubResource("InputEventKey_whtjw")]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4wfac"]
 content_margin_left = 5.0
@@ -199,7 +160,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = SubResource("Shortcut_fqfec")
+shortcut = ExtResource("4_4wfac")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -271,7 +232,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = SubResource("Shortcut_i7ybx")
+shortcut = ExtResource("6_fqfec")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -343,7 +304,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = SubResource("Shortcut_whtjw")
+shortcut = ExtResource("7_i7ybx")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -415,7 +376,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = SubResource("Shortcut_m6efw")
+shortcut = ExtResource("8_m6efw")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -487,7 +448,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = SubResource("Shortcut_aovju")
+shortcut = ExtResource("9_whtjw")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -611,7 +572,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = null
+shortcut = ExtResource("7_fqfec")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -683,7 +644,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = null
+shortcut = ExtResource("4_4wfac")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -792,7 +753,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = null
+shortcut = ExtResource("4_4wfac")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -914,7 +875,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = null
+shortcut = ExtResource("7_fqfec")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -986,7 +947,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = null
+shortcut = ExtResource("4_4wfac")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -1102,7 +1063,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = null
+shortcut = ExtResource("7_fqfec")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
@@ -1174,7 +1135,7 @@ action_mode = 1
 button_mask = 1
 keep_pressed_outside = false
 button_group = null
-shortcut = null
+shortcut = ExtResource("4_4wfac")
 shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("7_maioh")
