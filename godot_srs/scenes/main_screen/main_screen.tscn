@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://co561e5g14emk"]
+[gd_scene load_steps=4 format=3 uid="uid://co561e5g14emk"]
 
 [ext_resource type="Script" uid="uid://bcvnvxffgqgeq" path="res://scenes/main_screen/main_screen.gd" id="1_b5wj8"]
+[ext_resource type="StyleBox" uid="uid://ck6edsvq7mi1u" path="res://ui/components/styleboxes/menu/menu_panel.tres" id="2_sr0hp"]
+[ext_resource type="Script" uid="uid://br52erhtahd63" path="res://scenes/main_screen/nav_bar.gd" id="3_ojtip"]
 
 [node name="MainScreen" type="Control"]
 layout_mode = 3
@@ -19,3 +21,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17254902, 0.17254902, 0.17254902, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="NavBar" type="PanelContainer" parent="Margin" node_paths=PackedStringArray("file_nav_menu")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = ExtResource("2_sr0hp")
+script = ExtResource("3_ojtip")
+profile_select_scene = "res://scenes/profile_select/profile_select.tscn"
+file_nav_menu = NodePath("List/File")
+
+[node name="List" type="HBoxContainer" parent="Margin/NavBar"]
+layout_mode = 2
+
+[node name="File" type="MenuButton" parent="Margin/NavBar/List"]
+custom_minimum_size = Vector2(68, 0)
+layout_mode = 2
+text = "File"
+switch_on_hover = true
+item_count = 3
+popup/item_0/text = "Switch Profile"
+popup/item_0/id = 0
+popup/item_1/id = 99
+popup/item_1/disabled = true
+popup/item_1/separator = true
+popup/item_2/text = "Exit"
+popup/item_2/id = 1
