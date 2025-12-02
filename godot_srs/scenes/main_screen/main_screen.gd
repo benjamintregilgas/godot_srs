@@ -16,7 +16,6 @@ func _ready() -> void:
 	WindowManager.set_window(
 		"%s - GodotSRS" % current_profile_name,
 		Vector2i(1920, 1080),
-		true,
 		MIN_WINDOW_SIZE,
 		MAX_WINDOW_SIZE,
 	)
