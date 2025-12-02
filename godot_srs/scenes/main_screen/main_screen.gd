@@ -21,9 +21,14 @@ func _ready() -> void:
 
 
 func _create_profile_select_window() -> void:
-	WindowManager.create_window(profile_select_scene, "Profiles", "profiles",
+	var profile_select_window: Window = WindowManager.create_window(profile_select_scene, "Profiles", "profiles",
 				Vector2i(425, 355), Vector2i(425, 155),
 		)
+	profile_select_window.exclusive = true
+	profile_select_window.close_requested.connect(
+		func():
+			get_tree().quit()
+	)
 
 
 func _refresh_screen() -> void:
