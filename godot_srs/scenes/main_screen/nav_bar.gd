@@ -1,6 +1,8 @@
 extends PanelContainer
 
 
+signal refresh_requested
+
 @export_file_path("*.tscn", "*.scn") var profile_select_scene: String
 @export var file_nav_menu: MenuButton
 
@@ -13,7 +15,7 @@ func file_nav_menu_pressed(id: int) -> void:
 	match id:
 		0: # Switch Profile
 			ProfileManager.current_profile = null
-			WindowManager.switch_scene(profile_select_scene)
+			refresh_requested.emit()
 		1: # Exit
 			get_tree().quit()
 		_:

@@ -22,21 +22,13 @@ extends Control
 @export_group("Delete Profile Window")
 @export var confirm_delete_profile_window: Window
 @export var confirm_delete_profile_prompt: Label
-@export_group("")
-@export_category("Scene Paths")
-@export_file_path("*.tscn", "*.scn") var main_screen_scene: String
 
 ## Highlighted profile in [profile_container].
 var selected_profile: Profile = null
 
 
-## Setup the window and refresh profile list.
+## Refresh profile list from nothing to available profiles.
 func _ready() -> void:
-	WindowManager.set_window(
-		"Profiles",
-		Vector2i(425, 355),
-		Vector2i(425, 155),
-	)
 	_refresh_profile_list()
 
 
@@ -87,7 +79,12 @@ func _refresh_profile_list() -> void:
 func _on_open_profile_pressed() -> void:
 	if selected_profile:
 		ProfileManager.current_profile = selected_profile
-		WindowManager.switch_scene(main_screen_scene)
+		var main_scene: Node = null
+		if get_tree().root.has_node("MainScreen"):
+			main_scene = get_tree().root.get_node("MainScreen")
+		if main_scene.has_method("_refresh_screen"):
+			main_scene._refresh_screen()
+		WindowManager.close_window("profiles")
 
 # Add Profile
 func _on_add_profile_pressed() -> void:

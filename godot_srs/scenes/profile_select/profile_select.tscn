@@ -52,7 +52,6 @@ rename_profile_window = NodePath("SubWindows/RenameProfileWindow")
 rename_profile_line_edit = NodePath("SubWindows/RenameProfileWindow/Margin/Content/LineEdit")
 confirm_delete_profile_window = NodePath("SubWindows/ConfirmDeleteProfileWindow")
 confirm_delete_profile_prompt = NodePath("SubWindows/ConfirmDeleteProfileWindow/Margin/Content/Title")
-main_screen_scene = "res://scenes/main_screen/main_screen.tscn"
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1

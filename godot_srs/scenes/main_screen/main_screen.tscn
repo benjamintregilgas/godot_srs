@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://ck6edsvq7mi1u" path="res://ui/components/styleboxes/menu/menu_panel.tres" id="2_sr0hp"]
 [ext_resource type="Script" uid="uid://br52erhtahd63" path="res://scenes/main_screen/nav_bar.gd" id="3_ojtip"]
 
-[node name="MainScreen" type="Control"]
+[node name="MainScreen" type="Control" node_paths=PackedStringArray("content", "disclaimer", "navigation_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +12,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b5wj8")
+content = NodePath("Content")
+disclaimer = NodePath("Disclaimer")
+navigation_bar = NodePath("Content/NavBar")
+profile_select_scene = "res://scenes/profile_select/profile_select.tscn"
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -22,7 +26,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.17254902, 0.17254902, 0.17254902, 1)
 
-[node name="Margin" type="MarginContainer" parent="."]
+[node name="Content" type="MarginContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,7 +39,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="NavBar" type="PanelContainer" parent="Margin" node_paths=PackedStringArray("file_nav_menu")]
+[node name="NavBar" type="PanelContainer" parent="Content" node_paths=PackedStringArray("file_nav_menu")]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -43,10 +48,10 @@ script = ExtResource("3_ojtip")
 profile_select_scene = "res://scenes/profile_select/profile_select.tscn"
 file_nav_menu = NodePath("List/File")
 
-[node name="List" type="HBoxContainer" parent="Margin/NavBar"]
+[node name="List" type="HBoxContainer" parent="Content/NavBar"]
 layout_mode = 2
 
-[node name="File" type="MenuButton" parent="Margin/NavBar/List"]
+[node name="File" type="MenuButton" parent="Content/NavBar/List"]
 custom_minimum_size = Vector2(68, 0)
 layout_mode = 2
 text = "File"
@@ -59,3 +64,18 @@ popup/item_1/disabled = true
 popup/item_1/separator = true
 popup/item_2/text = "Exit"
 popup/item_2/id = 1
+
+[node name="Disclaimer" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Please select a profile to continue."
